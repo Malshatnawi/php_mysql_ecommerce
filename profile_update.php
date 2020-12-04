@@ -1,40 +1,58 @@
-<?php
+<?php 
 
 session_start();
 
-ob_start();
-
 if(isset($_SESSION['customer'])){
-
-
+}
+else{
+    echo "NOT ALLOWED TO VIEW THIS PAGE";
+    die();
 }
 
-
-
 $connection = mysqli_connect("localhost","root" ,"" ,"project4_ecommerce");
-
 if(!$connection){
-	die("can not connect to the server");
-	}
+    die("can not connect to the server");
+}
 
-// echo "<a href='single_product.php'>Go</a>";
+// $query="SELECT * FROM customers WHERE customer_id = {$_SESSION['customer']};";
+// $result=mysqli_query($connection, $query);
+// $row=mysqli_fetch_assoc($result);
 
-// echo "THIS IS CUSTOMERS PAGE";
+if (isset($_POST['customer_update'])){
+    //   echo "request is set";
+    //   die();
+    $customer_name      = $_POST['customer_name'];
+    $customer_email     = $_POST['customer_email'];
+    $customer_password  = $_POST['customer_password'];
+    $customer_phone     = $_POST['customer_phone'];
+    $customer_address   = $_POST['customer_address'];
+    
+    $query  = "UPDATE customers SET customer_name      = '$customer_name',
+                                    customer_email     = '$customer_email',
+                                    customer_phone     = '$customer_phone',
+                                    customer_password  = '$customer_password',
+                                    customer_address   = '$customer_address'
+              WHERE customer_id = {$_SESSION['customer']}; ";
+             
+    
+             $result=mysqli_query($connection, $query);
+    
+   
+    // header("location:manage_customers.php");
+    // $query  = "SELECT * FROM customers WHERE customer_id = {$_GET['id']}";
+    // $result = mysqli_query($connection, $query);
+    // $row    = mysqli_fetch_assoc($result); 
+}
 
-?> 
+?>
 
-<!--
-	Author: W3layouts
-	Author URL: http://w3layouts.com
-	License: Creative Commons Attribution 3.0 Unported
-	License URL: http://creativecommons.org/licenses/by/3.0/
--->
+
 
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-	<title>Goggles Ecommerce Category Bootstrap responsive Web Template | Home :: w3layouts</title>
+	<title>Muchmore Customer profile</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<meta name="keywords" content="Goggles a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -52,8 +70,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="css/login_overlay.css" rel='stylesheet' type='text/css' />
 	<link href="css/style6.css" rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="css/shop.css" type="text/css" />
-	<link rel="stylesheet" href="css/owl.carousel.css" type="text/css" media="all">
-	<link rel="stylesheet" href="css/owl.theme.css" type="text/css" media="all">
+	<link href="css/contact.css" rel='stylesheet' type='text/css' />
 	<link href="css/style.css" rel='stylesheet' type='text/css' />
 	<link href="css/fontawesome-all.css" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
@@ -96,7 +113,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-6 logo-w3layouts text-center">
 					<h1 class="logo-w3layouts">
 						<a class="navbar-brand" href="index.html">
-							Muchmore </a>
+							Goggles </a>
 					</h1>
 				</div>
 
@@ -114,8 +131,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<button class="top_googles_cart" type="submit" name="submit" value="">
 									My Cart
 									<i class="fas fa-cart-arrow-down"></i>
-                                </button>
-                                
+								</button>
 							</form>
 						</li>
 					</ul>
@@ -151,7 +167,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<!---->
 				</div>
 			</div>
-
 			<div class="search">
 				<div class="mobile-nav-button">
 					<button id="trigger-overlay" type="button">
@@ -163,108 +178,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<button type="button" class="overlay-close">
 						<i class="fa fa-times" aria-hidden="true"></i>
 					</button>
-					<!-- <form method="POST">
-					<input class="form-control" type="search" name="item" placeholder="Search here..." required="">
-					</form> -->
-
-					<?php
-						 if(isset($_POST['submit'])){
-							 $item=$_POST['item'];
-
-							$_SESSION['item']=$_POST['item'];
-							echo $_SESSION['item'];}
-							// header("location:searchresults.php");}
-					// 	 $query  = "SELECT * from categories WHERE category_name ={$_POST['item']}";
-					// 	$result = mysqli_query($connection, $query);
-					// 	while ($row = mysqli_fetch_assoc($result)) {
-					// 		$val= $row['category_id'];
-					// 		$catname = $row['category_name'];
-					// 		echo "<option value='$val'>$catname</option>";
-					// 	}
-
-					// }
-						?>
-
-					<form method="POST" class="d-flex" action="searchresults.php">
-					<input class="form-control" type="text" name="item" placeholder="Search here..." required="">
-
-					<button type="submit" name="submit" class="btn btn-primary submit">
-						<i class="fas fa-search"></i>
-					</button>
-
-					</form>
-					
-
-
-					<?php
-						
-						
-						 if(isset($_POST['submit'])){
-							 $item=$_POST['item'];
-
-							$_SESSION['item']=$_POST['item'];
-							header("location:searchresults.php");}
-				
-					
-					
-						?>
-
-				</div>
-<!-- 
-
-						
-				<form method="GET" action="">
-						<input type="text" name="items"> -->
-
-						
-						<!-- // echo "<form method='POST' action=''>";
-						// echo "<input type='text' name='items'>";
-
-						
-						
-						// $items=$_POST['items'];
-
-						// echo "<button  type='submit' name='go'><a href='searchresults.php?items=$items'>Go</a></button>";
-						// echo "</form>";
-
-						
-
-						// if(isset($_GET['go'])){
-						// 	$search=$_GET['items'];
-						// 	echo $search;
-						// 	$_SESSION['items']=$search;
-						// 	header("location:searchresults.php");
-						// } -->
-
-
-
-
-
-
-
-
-
-
-
-			 	<!-- <div class="search"> -->
-				<!-- <div class="mobile-nav-button">
-					<button id="trigger-overlay" type="button">
-						<i class="fas fa-search"></i>
-					</button>
-				</div> -->
-				<!-- open/close -->
-				<!-- <div class="overlay overlay-door">
-					<button type="button" class="overlay-close">
-						<i class="fa fa-times" aria-hidden="true"></i>
-					</button>
 					<form action="#" method="post" class="d-flex">
 						<input class="form-control" type="search" placeholder="Search here..." required="">
 						<button type="submit" class="btn btn-primary submit">
 							<i class="fas fa-search"></i>
 						</button>
-					</form> -->
+					</form>
 
-				<!-- </div> -->
+				</div>
 				<!-- open/close -->
 			</div>
 			<label class="top-log mx-auto"></label>
@@ -278,7 +199,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav nav-mega mx-auto">
-						<li class="nav-item active">
+						<li class="nav-item">
 							<a class="nav-link ml-lg-0" href="index.html">Home
 								<span class="sr-only">(current)</span>
 							</a>
@@ -430,366 +351,152 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<hr>
 								</li>
 							</ul>
+
+
 						</li>
-						<li class="nav-item">
+						<li class="nav-item active">
 							<a class="nav-link" href="contact.html">Contact</a>
 						</li>
+
 					</ul>
 
 				</div>
 			</nav>
 		</header>
-		<!-- //header -->
 		<!-- banner -->
-		<div class="banner">
-			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-				</ol>
-				<div class="carousel-inner" role="listbox">
-					<div class="carousel-item active">
-						<div class="carousel-caption text-center">
-							<h3>Men’s eyewear
-								<span>Cool summer sale 50% off</span>
-							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-						</div>
-					</div>
-					<div class="carousel-item item2">
-						<div class="carousel-caption text-center">
-							<h3>Women’s eyewear
-								<span>Want to Look Your Best?</span>
-							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
+		<div class="banner_inner">
+			<div class="services-breadcrumb">
+				<div class="inner_breadcrumb">
 
-						</div>
-					</div>
-					<div class="carousel-item item3">
-						<div class="carousel-caption text-center">
-							<h3>Men’s eyewear
-								<span>Cool summer sale 50% off</span>
-							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-
-						</div>
-					</div>
-					<div class="carousel-item item4">
-						<div class="carousel-caption text-center">
-							<h3>Women’s eyewear
-								<span>Want to Look Your Best?</span>
-							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-						</div>
-					</div>
+					<ul class="short">
+						<li>
+							<a href="index.html">Home</a>
+							<i>|</i>
+						</li>
+						<li>Contact Us</li>
+					</ul>
 				</div>
-				<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
 			</div>
-			<!--//banner -->
+
 		</div>
-    </div>
-    
+		<!--//banner -->
+	</div>
+	<!--// header_top -->
+	<!-- top Products -->
 
+    <?php 
+    $query="SELECT * FROM customers WHERE customer_id = {$_SESSION['customer']};";
+    $result=mysqli_query($connection, $query);
+    $row=mysqli_fetch_assoc($result);
 
-<div class="container">
-    <div class='row galsses-grids pt-lg-5 pt-3'>
-    
-    <?php
-
-                $connection = mysqli_connect("localhost","root" ,"" ,"project4_ecommerce");
-
-                if(!$connection){
-                    die("can not connect to the server");
-                    }
-
-	              $query = "select * from categories ";
-	              $result = mysqli_query($connection,$query);
-	              while($row = mysqli_fetch_assoc($result)){
-                  echo " <div class='col-lg-6 galsses-grid-left mt-5'>";
-                  echo "<a href='products.php?id={$row['category_id']}'>";
-                  echo "<figure class='effect-lexi'>";
-                  
-				  echo "<img src='{$row['category_image']}' alt='' class=''>";
-				  echo "<figcaption><h3><span>{$row['category_name']}</span></h3><p> Express your style now.</p>
-              </figcaption>
-          </figure></a>
-      </div>";
-				  
-				  }
-				  
-						?>
-
-             
-					<!-- <div class="col-lg-6 galsses-grid-left">
-                    <a href="#">
-						<figure class="effect-lexi">
-                            
-							<img src="images/banner4.jpg" alt="" class="img-fluid">
-							<figcaption>
-								<h3>Editor's
-									<span>Pick</span>
-								</h3>
-								<p> Express your style now.</p>
-							</figcaption>
-						</figure></a>
-					</div>
-					<div class="col-lg-6 galsses-grid-left">
-                    <a href="#">
-						<figure class="effect-lexi">
-                        
-							<img src="images/banner1.jpg" alt="" class="img-fluid">
-							<figcaption>
-								<h3>Editor's
-									<span>Pick</span>
-								</h3>
-								<p>Express your style now.</p>
-							</figcaption>
-						</figure></a>
-					</div>
-                </div>
-
-                <div class="row galsses-grids pt-lg-5 pt-3">
-					<div class="col-lg-6 galsses-grid-left">
-                    <a href="#">
-						<figure class="effect-lexi">
-                            
-							<img src="images/banner4.jpg" alt="" class="img-fluid">
-							<figcaption>
-								<h3>Editor's
-									<span>Pick</span>
-								</h3>
-								<p> Express your style now.</p>
-							</figcaption>
-						</figure></a>
-					</div>
-					<div class="col-lg-6 galsses-grid-left">
-                    <a href="#">
-						<figure class="effect-lexi">
-                        
-							<img src="images/banner1.jpg" alt="" class="img-fluid">
-							<figcaption>
-								<h3>Editor's
-									<span>Pick</span>
-								</h3>
-								<p>Express your style now.</p>
-							</figcaption>
-						</figure></a>
-                    </div> --> 
-
-                </div>
-    </div>
+    ?>
 
 
 
 
 
 
-    <!-- /grids -->
-    <div class="bottom-sub-grid-content py-lg-5 py-3">
-					<div class="row">
-						<div class="col-lg-4 bottom-sub-grid text-center">
-							<div class="bt-icon">
-
-								<span class="far fa-hand-paper"></span>
-							</div>
-
-							<h4 class="sub-tittle-w3layouts my-lg-4 my-3">Satisfaction Guaranteed</h4>
-							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-							<p>
-								<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-							</p>
-						</div>
-						<!-- /.col-lg-4 -->
-						<div class="col-lg-4 bottom-sub-grid text-center">
-							<div class="bt-icon">
-								<span class="fas fa-rocket"></span>
-							</div>
-
-							<h4 class="sub-tittle-w3layouts my-lg-4 my-3">Fast Shipping</h4>
-							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-							<p>
-								<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-							</p>
-						</div>
-						<!-- /.col-lg-4 -->
-						<div class="col-lg-4 bottom-sub-grid text-center">
-							<div class="bt-icon">
-								<span class="far fa-sun"></span>
-							</div>
-
-							<h4 class="sub-tittle-w3layouts my-lg-4 my-3">UV Protection</h4>
-							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-							<p>
-								<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-							</p>
-						</div>
-						<!-- /.col-lg-4 -->
-					</div>
-				</div>
-                <!-- //grids -->
 
 
-                <!--/meddle-->
-				<div class="row">
-					<div class="col-md-12 middle-slider my-4">
-						<div class="middle-text-info ">
 
-							<h3 class="tittle-w3layouts two text-center my-lg-4 mt-3">Summer Flash sale</h3>
-							<div class="simply-countdown-custom" id="simply-countdown-custom"></div>
+	<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+		<div class="container">
+			<h3 class="tittle-w3layouts text-center my-lg-4 my-4">Customer Profile</h3>
+			<div class="inner_sec">
+			
+				<div class="contact_grid_right">
+					<form action="#" method="post">
+						<div class="row contact_left_grid">
 
-						</div>
-					</div>
-				</div>
-                <!--//meddle-->
-                
-                <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
-		<div class="container-fluid">
-			<div class="inner-sec-shop px-lg-4 px-3">
-				<h3 class="tittle-w3layouts my-lg-4 my-4">New Arrivals for you </h3>
-				<div class="row">
-					<!-- /womens -->
-					<div class="col-md-3 product-men women_two">
-						<div class="product-googles-info googles">
-							<div class="men-pro-item">
-								<div class="men-thumb-item">
-									<img src="images/s1.jpg" class="img-fluid" alt="">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
+							<div class="col-md ">
+                            <p class="sub text-center mb-lg-5 mb-3">Edit your profile</p> <br><br>
+								<div class="form-group">
+									<label class="my-2">Name</label>
+									<input class="form-control" type="text" name="customer_name" placeholder="" required=""  value= "<?php echo $row['customer_name']?>" >
 								</div>
-								<div class="item-info-product">
-									<div class="info-product-price">
-										<div class="grid_meta">
-											<div class="product_price">
-												<h4>
-													<a href="single.html">Farenheit (Grey)</a>
-												</h4>
-												<div class="grid-price mt-2">
-													<span class="money ">$575.00</span>
-												</div>
-											</div>
-											<ul class="stars">
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star-half-o" aria-hidden="true"></i>
-													</a>
-												</li>
-											</ul>
-										</div>
-										<div class="googles single-item hvr-outline-out">
-											<form action="#" method="post">
-												<input type="hidden" name="cmd" value="_cart">
-												<input type="hidden" name="add" value="1">
-												<input type="hidden" name="googles_item" value="Farenheit">
-												<input type="hidden" name="amount" value="575.00">
-												<button type="submit" class="googles-cart pgoogles-cart">
-													<i class="fas fa-cart-plus"></i>
-												</button>
-
-												
-											</form>
-
-										</div>
-									</div>
-									<div class="clearfix"></div>
+								<div class="form-group">
+									<label>Email</label>
+									<input class="form-control" type="email" name="customer_email" placeholder="" required="" value= "<?php echo $row['customer_email']?>">
 								</div>
+								<div class="form-group">
+									<label class="my-2">Password</label>
+									<input class="form-control" type="password" name="customer_password" placeholder="" required="" value= "">
+                                </div>
+                                <!-- <div class="form-group">
+									<label class="my-2">Re-enter password</label>
+									<input class="form-control" type="text" name="repassword" placeholder="" required="" >
+                                </div> -->
+                                <div class="form-group">
+									<label class="my-2">Phone No.</label>
+									<input class="form-control" type="numbers" name="customer_phone" placeholder="" required="" value="<?php echo $row['customer_phone']?>" >
+                                </div>
+                                <div class="form-group">
+									<label class="my-2">Address</label>
+									<input class="form-control" type="text" name="customer_address" placeholder="" required="" value= "<?php echo $row['customer_address']?>">
+                                </div>
+                                <input class="form-control" type="submit" value="Update" name="customer_update"><br><br><br>
 							</div>
+							
 						</div>
-                    </div>
-    </div>
-    </div>
-    </div>
-    </section>
-
-
+					</form>
+                </div>
                 
 
-                
+                <p class="sub text-center mb-lg-5 mb-3">We love to discuss your idea</p>
+				<div class="address row">
 
-    
-				<!--//row-->
-				
-				
-				
-				
-				<!-- /clients-sec -->
-				<div class="testimonials p-lg-5 p-3 mt-4">
-					<div class="row last-section">
-						<div class="col-lg-3 footer-top-w3layouts-grid-sec">
-							<div class="mail-grid-icon text-center">
-								<i class="fas fa-gift"></i>
+					<div class="col-lg-4 address-grid">
+						<div class="row address-info">
+							<div class="col-md-3 address-left text-center">
+								<i class="far fa-map"></i>
 							</div>
-							<div class="mail-grid-text-info">
-								<h3>Genuine Product</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur</p>
+							<div class="col-md-9 address-right text-left">
+								<h6>Address</h6>
+								<p> Amman, Jordan
+
+								</p>
 							</div>
 						</div>
-						<div class="col-lg-3 footer-top-w3layouts-grid-sec">
-							<div class="mail-grid-icon text-center">
-								<i class="fas fa-shield-alt"></i>
+
+					</div>
+					<div class="col-lg-4 address-grid">
+						<div class="row address-info">
+							<div class="col-md-3 address-left text-center">
+								<i class="far fa-envelope"></i>
 							</div>
-							<div class="mail-grid-text-info">
-								<h3>Secure Products</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur</p>
+							<div class="col-md-9 address-right text-left">
+								<h6>Email</h6>
+								<p>Email :
+									<a href="mailto:example@email.com"> muchmore@gmail.com</a>
+
+								</p>
 							</div>
+
 						</div>
-						<div class="col-lg-3 footer-top-w3layouts-grid-sec">
-							<div class="mail-grid-icon text-center">
-								<i class="fas fa-dollar-sign"></i>
+					</div>
+					<div class="col-lg-4 address-grid">
+						<div class="row address-info">
+							<div class="col-md-3 address-left text-center">
+								<i class="fas fa-mobile-alt"></i>
 							</div>
-							<div class="mail-grid-text-info">
-								<h3>Cash on Delivery</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur</p>
+							<div class="col-md-9 address-right text-left">
+								<h6>Phone</h6>
+								<p>009627 7032 2403</p>
+
 							</div>
-						</div>
-						<div class="col-lg-3 footer-top-w3layouts-grid-sec">
-							<div class="mail-grid-icon text-center">
-								<i class="fas fa-truck"></i>
-							</div>
-							<div class="mail-grid-text-info">
-								<h3>Easy Delivery</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur</p>
-							</div>
+
 						</div>
 					</div>
 				</div>
-				<!-- //clients-sec -->
 			</div>
 		</div>
 	</section>
-	<!-- about -->
+	<div class="contact-map">
+
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100949.24429313939!2d-122.44206553967531!3d37.75102885910819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan+Francisco%2C+CA%2C+USA!5e0!3m2!1sen!2sin!4v1472190196783"
+		    class="map" style="border:0" allowfullscreen=""></iframe>
+	</div>
+
 	<!--footer -->
 	<footer class="py-lg-5 py-3">
 		<div class="container-fluid px-lg-5 px-3">
@@ -902,44 +609,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!--jQuery-->
 	<script src="js/jquery-2.2.3.min.js"></script>
 	<!-- newsletter modal -->
-	<!-- Modal -->
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body text-center p-5 mx-auto mw-100">
-					<h6>Join our newsletter and get</h6>
-					<h3>50% Off for your first Pair of Eye wear</h3>
-					<div class="login newsletter">
-						<form action="#" method="post">
-							<div class="form-group">
-								<label class="mb-2">Email address</label>
-								<input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="" required="">
-							</div>
-							<button type="submit" class="btn btn-primary submit mb-4">Get 50% Off</button>
-						</form>
-						<p class="text-center">
-							<a href="#">No thanks I want to pay full Price</a>
-						</p>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<script>
-		$(document).ready(function () {
-			$("#myModal").modal();
-		});
-	</script>
-	<!-- // modal -->
-
 	<!--search jQuery-->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<script src="js/classie-search.js"></script>
@@ -975,52 +644,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	</script>
 	<!-- carousel -->
-	<!-- Count-down -->
-	<script src="js/simplyCountdown.js"></script>
-	<link href="css/simplyCountdown.css" rel='stylesheet' type='text/css' />
-	<script>
-		var d = new Date();
-		simplyCountdown('simply-countdown-custom', {
-			year: d.getFullYear(),
-			month: d.getMonth() + 2,
-			day: 25
-		});
-	</script>
-	<!--// Count-down -->
-	<script src="js/owl.carousel.js"></script>
-	<script>
-		$(document).ready(function () {
-			$('.owl-carousel').owlCarousel({
-				loop: true,
-				margin: 10,
-				responsiveClass: true,
-				responsive: {
-					0: {
-						items: 1,
-						nav: true
-					},
-					600: {
-						items: 2,
-						nav: false
-					},
-					900: {
-						items: 3,
-						nav: false
-					},
-					1000: {
-						items: 4,
-						nav: true,
-						loop: false,
-						margin: 20
-					}
-				}
-			})
-		})
-	</script>
-
-	<!-- //end-smooth-scrolling -->
-
-
 	<!-- dropdown nav -->
 	<script>
 		$(document).ready(function () {
@@ -1037,7 +660,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	</script>
 	<!-- //dropdown nav -->
-  <script src="js/move-top.js"></script>
+	<script src="js/move-top.js"></script>
     <script src="js/easing.js"></script>
     <script>
         jQuery(document).ready(function($) {
@@ -1067,6 +690,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <!--// end-smoth-scrolling -->
+
 
 	<script src="js/bootstrap.js"></script>
 	<!-- js file -->

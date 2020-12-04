@@ -2,39 +2,26 @@
 
 session_start();
 
-ob_start();
-
 if(isset($_SESSION['customer'])){
-
-
+	
+    
+}
+else{
+	
+	header("location: http://localhost/E-Commerce%20Website%20PHP%20and%20MYSQL/CODE/ADMIN%20DASHBOARD/concept-master/concept-master/pages/login.php");
+	
 }
 
+?>
 
 
-$connection = mysqli_connect("localhost","root" ,"" ,"project4_ecommerce");
 
-if(!$connection){
-	die("can not connect to the server");
-	}
-
-// echo "<a href='single_product.php'>Go</a>";
-
-// echo "THIS IS CUSTOMERS PAGE";
-
-?> 
-
-<!--
-	Author: W3layouts
-	Author URL: http://w3layouts.com
-	License: Creative Commons Attribution 3.0 Unported
-	License URL: http://creativecommons.org/licenses/by/3.0/
--->
 
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-	<title>Goggles Ecommerce Category Bootstrap responsive Web Template | Home :: w3layouts</title>
+	<title>Goggles Ecommerce Category Bootstrap responsive Web Template | Checkout :: w3layouts</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<meta name="keywords" content="Goggles a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -43,7 +30,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
 		}, false);
-
 		function hideURLbar() {
 			window.scrollTo(0, 1);
 		}
@@ -52,15 +38,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="css/login_overlay.css" rel='stylesheet' type='text/css' />
 	<link href="css/style6.css" rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="css/shop.css" type="text/css" />
-	<link rel="stylesheet" href="css/owl.carousel.css" type="text/css" media="all">
-	<link rel="stylesheet" href="css/owl.theme.css" type="text/css" media="all">
+	<link rel="stylesheet" type="text/css" href="css/checkout.css">
+	<link href="css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
 	<link href="css/style.css" rel='stylesheet' type='text/css' />
 	<link href="css/fontawesome-all.css" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
 	    rel="stylesheet">
 </head>
-
 <body>
 	<div class="banner-top container-fluid" id="home">
 		<!-- header -->
@@ -68,7 +53,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="row">
 				<div class="col-md-3 top-info text-left mt-lg-4">
 					<ul>
-                    <li class="">
+					<li class="">
 							<form action="#" method="post" class="last">
                                 <?php 
                                 if(!isset($_SESSION['customer'])){
@@ -96,10 +81,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-6 logo-w3layouts text-center">
 					<h1 class="logo-w3layouts">
 						<a class="navbar-brand" href="index.html">
-							Muchmore </a>
+							Goggles </a>
 					</h1>
 				</div>
-
 				<div class="col-md-3 top-info-cart text-right mt-lg-4">
 					<ul class="cart-inner-info">
 						<li class="button-log">
@@ -114,8 +98,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<button class="top_googles_cart" type="submit" name="submit" value="">
 									My Cart
 									<i class="fas fa-cart-arrow-down"></i>
-                                </button>
-                                
+								</button>
 							</form>
 						</li>
 					</ul>
@@ -142,7 +125,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<label class="form-check-label" for="exampleCheck1">Check me out</label>
 									</div>
 									<button type="submit" class="btn btn-primary submit mb-4">Sign In</button>
-
 								</form>
 							</div>
 							<!---->
@@ -151,7 +133,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<!---->
 				</div>
 			</div>
-
 			<div class="search">
 				<div class="mobile-nav-button">
 					<button id="trigger-overlay" type="button">
@@ -163,113 +144,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<button type="button" class="overlay-close">
 						<i class="fa fa-times" aria-hidden="true"></i>
 					</button>
-					<!-- <form method="POST">
-					<input class="form-control" type="search" name="item" placeholder="Search here..." required="">
-					</form> -->
-
-					<?php
-						 if(isset($_POST['submit'])){
-							 $item=$_POST['item'];
-
-							$_SESSION['item']=$_POST['item'];
-							echo $_SESSION['item'];}
-							// header("location:searchresults.php");}
-					// 	 $query  = "SELECT * from categories WHERE category_name ={$_POST['item']}";
-					// 	$result = mysqli_query($connection, $query);
-					// 	while ($row = mysqli_fetch_assoc($result)) {
-					// 		$val= $row['category_id'];
-					// 		$catname = $row['category_name'];
-					// 		echo "<option value='$val'>$catname</option>";
-					// 	}
-
-					// }
-						?>
-
-					<form method="POST" class="d-flex" action="searchresults.php">
-					<input class="form-control" type="text" name="item" placeholder="Search here..." required="">
-
-					<button type="submit" name="submit" class="btn btn-primary submit">
-						<i class="fas fa-search"></i>
-					</button>
-
-					</form>
-					
-
-
-					<?php
-						
-						
-						 if(isset($_POST['submit'])){
-							 $item=$_POST['item'];
-
-							$_SESSION['item']=$_POST['item'];
-							header("location:searchresults.php");}
-				
-					
-					
-						?>
-
-				</div>
-<!-- 
-
-						
-				<form method="GET" action="">
-						<input type="text" name="items"> -->
-
-						
-						<!-- // echo "<form method='POST' action=''>";
-						// echo "<input type='text' name='items'>";
-
-						
-						
-						// $items=$_POST['items'];
-
-						// echo "<button  type='submit' name='go'><a href='searchresults.php?items=$items'>Go</a></button>";
-						// echo "</form>";
-
-						
-
-						// if(isset($_GET['go'])){
-						// 	$search=$_GET['items'];
-						// 	echo $search;
-						// 	$_SESSION['items']=$search;
-						// 	header("location:searchresults.php");
-						// } -->
-
-
-
-
-
-
-
-
-
-
-
-			 	<!-- <div class="search"> -->
-				<!-- <div class="mobile-nav-button">
-					<button id="trigger-overlay" type="button">
-						<i class="fas fa-search"></i>
-					</button>
-				</div> -->
-				<!-- open/close -->
-				<!-- <div class="overlay overlay-door">
-					<button type="button" class="overlay-close">
-						<i class="fa fa-times" aria-hidden="true"></i>
-					</button>
 					<form action="#" method="post" class="d-flex">
 						<input class="form-control" type="search" placeholder="Search here..." required="">
 						<button type="submit" class="btn btn-primary submit">
 							<i class="fas fa-search"></i>
 						</button>
-					</form> -->
-
-				<!-- </div> -->
+					</form>
+				</div>
 				<!-- open/close -->
 			</div>
 			<label class="top-log mx-auto"></label>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light top-header mb-2">
-
 				<button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 				    aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
@@ -278,7 +163,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav nav-mega mx-auto">
-						<li class="nav-item active">
+						<li class="nav-item">
 							<a class="nav-link ml-lg-0" href="index.html">Home
 								<span class="sr-only">(current)</span>
 							</a>
@@ -332,14 +217,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													<img src="images/g3.jpg" class="img-fluid" alt="">
 												</a>
 											</div>
-
 										</div>
 									</div>
 									<hr>
 								</li>
 							</ul>
 						</li>
-						<li class="nav-item dropdown">
+						<li class="nav-item dropdown active">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true"
 							    aria-expanded="false">
 								Shop
@@ -383,7 +267,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<h5 class="tittle-w3layouts-sub"> Tittle goes here </h5>
 											<ul>
 												<li class="media-mini mt-3">
-
 													<a href="shop.html">Brooks Brothers</a>
 												</li>
 												<li>
@@ -403,7 +286,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												</li>
 											</ul>
 											<ul class="sub-in text-left">
-
 												<li>
 													<a href="shop.html">Polo Ralph Lauren</a>
 												</li>
@@ -414,17 +296,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 													<a href="shop.html">Ray-Ban Jr</a>
 												</li>
 											</ul>
-
 										</div>
 										<div class="col-md-4 media-list span4 text-left">
-
 											<h5 class="tittle-w3layouts-sub-nav">Tittle goes here </h5>
 											<div class="media-mini mt-3">
 												<a href="shop.html">
 													<img src="images/g1.jpg" class="img-fluid" alt="">
 												</a>
 											</div>
-
 										</div>
 									</div>
 									<hr>
@@ -435,361 +314,134 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<a class="nav-link" href="contact.html">Contact</a>
 						</li>
 					</ul>
-
 				</div>
 			</nav>
 		</header>
-		<!-- //header -->
 		<!-- banner -->
-		<div class="banner">
-			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-				</ol>
-				<div class="carousel-inner" role="listbox">
-					<div class="carousel-item active">
-						<div class="carousel-caption text-center">
-							<h3>Men’s eyewear
-								<span>Cool summer sale 50% off</span>
-							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-						</div>
-					</div>
-					<div class="carousel-item item2">
-						<div class="carousel-caption text-center">
-							<h3>Women’s eyewear
-								<span>Want to Look Your Best?</span>
-							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-
-						</div>
-					</div>
-					<div class="carousel-item item3">
-						<div class="carousel-caption text-center">
-							<h3>Men’s eyewear
-								<span>Cool summer sale 50% off</span>
-							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-
-						</div>
-					</div>
-					<div class="carousel-item item4">
-						<div class="carousel-caption text-center">
-							<h3>Women’s eyewear
-								<span>Want to Look Your Best?</span>
-							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-						</div>
-					</div>
+		<div class="banner_inner">
+			<div class="services-breadcrumb">
+				<div class="inner_breadcrumb">
+					<ul class="short">
+						<li>
+							<a href="index.html">Home</a>
+							<i>|</i>
+						</li>
+						<li>Checkout </li>
+					</ul>
 				</div>
-				<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
 			</div>
-			<!--//banner -->
 		</div>
-    </div>
-    
-
-
-<div class="container">
-    <div class='row galsses-grids pt-lg-5 pt-3'>
-    
-    <?php
-
-                $connection = mysqli_connect("localhost","root" ,"" ,"project4_ecommerce");
-
-                if(!$connection){
-                    die("can not connect to the server");
-                    }
-
-	              $query = "select * from categories ";
-	              $result = mysqli_query($connection,$query);
-	              while($row = mysqli_fetch_assoc($result)){
-                  echo " <div class='col-lg-6 galsses-grid-left mt-5'>";
-                  echo "<a href='products.php?id={$row['category_id']}'>";
-                  echo "<figure class='effect-lexi'>";
-                  
-				  echo "<img src='{$row['category_image']}' alt='' class=''>";
-				  echo "<figcaption><h3><span>{$row['category_name']}</span></h3><p> Express your style now.</p>
-              </figcaption>
-          </figure></a>
-      </div>";
-				  
-				  }
-				  
-						?>
-
-             
-					<!-- <div class="col-lg-6 galsses-grid-left">
-                    <a href="#">
-						<figure class="effect-lexi">
-                            
-							<img src="images/banner4.jpg" alt="" class="img-fluid">
-							<figcaption>
-								<h3>Editor's
-									<span>Pick</span>
-								</h3>
-								<p> Express your style now.</p>
-							</figcaption>
-						</figure></a>
-					</div>
-					<div class="col-lg-6 galsses-grid-left">
-                    <a href="#">
-						<figure class="effect-lexi">
-                        
-							<img src="images/banner1.jpg" alt="" class="img-fluid">
-							<figcaption>
-								<h3>Editor's
-									<span>Pick</span>
-								</h3>
-								<p>Express your style now.</p>
-							</figcaption>
-						</figure></a>
-					</div>
-                </div>
-
-                <div class="row galsses-grids pt-lg-5 pt-3">
-					<div class="col-lg-6 galsses-grid-left">
-                    <a href="#">
-						<figure class="effect-lexi">
-                            
-							<img src="images/banner4.jpg" alt="" class="img-fluid">
-							<figcaption>
-								<h3>Editor's
-									<span>Pick</span>
-								</h3>
-								<p> Express your style now.</p>
-							</figcaption>
-						</figure></a>
-					</div>
-					<div class="col-lg-6 galsses-grid-left">
-                    <a href="#">
-						<figure class="effect-lexi">
-                        
-							<img src="images/banner1.jpg" alt="" class="img-fluid">
-							<figcaption>
-								<h3>Editor's
-									<span>Pick</span>
-								</h3>
-								<p>Express your style now.</p>
-							</figcaption>
-						</figure></a>
-                    </div> --> 
-
-                </div>
-    </div>
-
-
-
-
-
-
-    <!-- /grids -->
-    <div class="bottom-sub-grid-content py-lg-5 py-3">
-					<div class="row">
-						<div class="col-lg-4 bottom-sub-grid text-center">
-							<div class="bt-icon">
-
-								<span class="far fa-hand-paper"></span>
-							</div>
-
-							<h4 class="sub-tittle-w3layouts my-lg-4 my-3">Satisfaction Guaranteed</h4>
-							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-							<p>
-								<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-							</p>
-						</div>
-						<!-- /.col-lg-4 -->
-						<div class="col-lg-4 bottom-sub-grid text-center">
-							<div class="bt-icon">
-								<span class="fas fa-rocket"></span>
-							</div>
-
-							<h4 class="sub-tittle-w3layouts my-lg-4 my-3">Fast Shipping</h4>
-							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-							<p>
-								<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-							</p>
-						</div>
-						<!-- /.col-lg-4 -->
-						<div class="col-lg-4 bottom-sub-grid text-center">
-							<div class="bt-icon">
-								<span class="far fa-sun"></span>
-							</div>
-
-							<h4 class="sub-tittle-w3layouts my-lg-4 my-3">UV Protection</h4>
-							<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
-							<p>
-								<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
-							</p>
-						</div>
-						<!-- /.col-lg-4 -->
-					</div>
-				</div>
-                <!-- //grids -->
-
-
-                <!--/meddle-->
-				<div class="row">
-					<div class="col-md-12 middle-slider my-4">
-						<div class="middle-text-info ">
-
-							<h3 class="tittle-w3layouts two text-center my-lg-4 mt-3">Summer Flash sale</h3>
-							<div class="simply-countdown-custom" id="simply-countdown-custom"></div>
-
-						</div>
-					</div>
-				</div>
-                <!--//meddle-->
-                
-                <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
-		<div class="container-fluid">
+		<!--//banner -->
+	</div>
+	<!--// header_top -->
+	<!--checkout-->
+	<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+		<div class="container">
 			<div class="inner-sec-shop px-lg-4 px-3">
-				<h3 class="tittle-w3layouts my-lg-4 my-4">New Arrivals for you </h3>
-				<div class="row">
-					<!-- /womens -->
-					<div class="col-md-3 product-men women_two">
-						<div class="product-googles-info googles">
-							<div class="men-pro-item">
-								<div class="men-thumb-item">
-									<img src="images/s1.jpg" class="img-fluid" alt="">
-									<div class="men-cart-pro">
-										<div class="inner-men-cart-pro">
-											<a href="single.html" class="link-product-add-cart">Quick View</a>
-										</div>
-									</div>
-									<span class="product-new-top">New</span>
-								</div>
-								<div class="item-info-product">
-									<div class="info-product-price">
-										<div class="grid_meta">
-											<div class="product_price">
-												<h4>
-													<a href="single.html">Farenheit (Grey)</a>
-												</h4>
-												<div class="grid-price mt-2">
-													<span class="money ">$575.00</span>
+				<h3 class="tittle-w3layouts my-lg-4 mt-3">Checkout </h3>
+				
+				<div class="checkout-left row">
+					
+					<div class="col-md-8 address_form">
+						<h4>Add some details</h4>
+						<form action="" method="post" class="creditly-card-form agileinfo_form">
+							<section class="creditly-wrapper wrapper">
+								<div class="information-wrapper">
+									<div class="first-row form-group">
+										<div class="controls">
+											<label class="control-label">Full name: </label>
+											<input class="billing-address-name form-control" type="text" name="name" placeholder="Full name">
+                                        </div>
+                                        
+										<div class="card_number_grids">
+											<div class="card_number_grid_left">
+												<div class="controls">
+													<label class="control-label">Mobile number:</label>
+													<input class="form-control" type="text" placeholder="Mobile number" name="phone">
 												</div>
 											</div>
-											<ul class="stars">
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star" aria-hidden="true"></i>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="fa fa-star-half-o" aria-hidden="true"></i>
-													</a>
-												</li>
-											</ul>
-										</div>
-										<div class="googles single-item hvr-outline-out">
-											<form action="#" method="post">
-												<input type="hidden" name="cmd" value="_cart">
-												<input type="hidden" name="add" value="1">
-												<input type="hidden" name="googles_item" value="Farenheit">
-												<input type="hidden" name="amount" value="575.00">
-												<button type="submit" class="googles-cart pgoogles-cart">
-													<i class="fas fa-cart-plus"></i>
-												</button>
+											<div class="card_number_grid_right">
+												<div class="controls">
+													<label class="control-label">Shipping Address: </label>
+													<input class="form-control" type="text" placeholder="Landmark" name="shipping_address">
+												</div>
+											</div>
+											<!-- <div class="clear"> </div> -->
+                                        </div>
+                                        
+                                    </div>
 
-												
-											</form>
+                                    <div>
+                                            <label for="payment" class='mb-4'> Payment Method</label> 
+                                            <select name="P" id="cars">
+                                                <option value="cashondelivery">Cash On Delivery</option>
+                                                
+                                            </select>
 
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-                    </div>
-    </div>
-    </div>
-    </div>
-    </section>
+                                            <?php 
+                                            
+                                            // if(isset($_SESSION['total'])){
+                                            //     echo "ok";
+                                            // }
+                                            // else{
+                                            //     echo "not connected";
+                                            // } 
+
+?>
+
+                                            <?php
+                                            
+                                            echo "<h2>Total</h2>";
+                                            echo "<h2 class='mb-4'>".$_SESSION['total']."</h2>";
+                                            ?>
 
 
-                
 
-                
+
+                                    <button class="submit check_out" name="submit">Checkout</button>
+                                    
+                                </div>
+                                
+							</section>
+                        </form>
+                        
+
+<?php
+
+$connection = mysqli_connect("localhost","root" ,"" ,"project4_ecommerce");
+
+if(!$connection){
+    die("can not connect to the server");
+}
+
+$query = "select * from customers where customer_id ={$_SESSION['customer']} ";
+$result = mysqli_query($connection,$query);
+$rows = mysqli_fetch_assoc($result);
+
+if(isset($_POST['submit'])){
+    $shipping=$_POST['shipping_address'];
 
     
-				<!--//row-->
-				
-				
-				
-				
-				<!-- /clients-sec -->
-				<div class="testimonials p-lg-5 p-3 mt-4">
-					<div class="row last-section">
-						<div class="col-lg-3 footer-top-w3layouts-grid-sec">
-							<div class="mail-grid-icon text-center">
-								<i class="fas fa-gift"></i>
-							</div>
-							<div class="mail-grid-text-info">
-								<h3>Genuine Product</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur</p>
-							</div>
-						</div>
-						<div class="col-lg-3 footer-top-w3layouts-grid-sec">
-							<div class="mail-grid-icon text-center">
-								<i class="fas fa-shield-alt"></i>
-							</div>
-							<div class="mail-grid-text-info">
-								<h3>Secure Products</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur</p>
-							</div>
-						</div>
-						<div class="col-lg-3 footer-top-w3layouts-grid-sec">
-							<div class="mail-grid-icon text-center">
-								<i class="fas fa-dollar-sign"></i>
-							</div>
-							<div class="mail-grid-text-info">
-								<h3>Cash on Delivery</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur</p>
-							</div>
-						</div>
-						<div class="col-lg-3 footer-top-w3layouts-grid-sec">
-							<div class="mail-grid-icon text-center">
-								<i class="fas fa-truck"></i>
-							</div>
-							<div class="mail-grid-text-info">
-								<h3>Easy Delivery</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur</p>
-							</div>
-						</div>
+
+	                                $query = "INSERT INTO orders (customer_id, shipping_address, total_amount)
+                                    VALUES ({$rows['customer_id']}, '$shipping',{$_SESSION['total']});";
+                                    
+                                    $result = mysqli_query($connection,$query);
+                                    
+}
+
+	    
+
+?>						
 					</div>
+					<div class="clearfix"> </div>
+       
 				</div>
-				<!-- //clients-sec -->
+                 
 			</div>
 		</div>
 	</section>
-	<!-- about -->
+	<!--//checkout-->
 	<!--footer -->
 	<footer class="py-lg-5 py-3">
 		<div class="container-fluid px-lg-5 px-3">
@@ -802,7 +454,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<p>Curabitur non nulla sit amet nislinit tempus convallis quis ac lectus. lac inia eget consectetur sed, convallis at
 							tellus. Nulla porttitor accumsana tincidunt.</p>
 						<ul class="footer-social text-left mt-lg-4 mt-3">
-
 							<li class="mx-2">
 								<a href="#">
 									<span class="fab fa-facebook-f"></span>
@@ -898,48 +549,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</footer>
 	<!-- //footer -->
-
 	<!--jQuery-->
 	<script src="js/jquery-2.2.3.min.js"></script>
 	<!-- newsletter modal -->
-	<!-- Modal -->
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body text-center p-5 mx-auto mw-100">
-					<h6>Join our newsletter and get</h6>
-					<h3>50% Off for your first Pair of Eye wear</h3>
-					<div class="login newsletter">
-						<form action="#" method="post">
-							<div class="form-group">
-								<label class="mb-2">Email address</label>
-								<input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="" required="">
-							</div>
-							<button type="submit" class="btn btn-primary submit mb-4">Get 50% Off</button>
-						</form>
-						<p class="text-center">
-							<a href="#">No thanks I want to pay full Price</a>
-						</p>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<script>
-		$(document).ready(function () {
-			$("#myModal").modal();
-		});
-	</script>
-	<!-- // modal -->
-
 	<!--search jQuery-->
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<script src="js/classie-search.js"></script>
@@ -949,13 +561,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="js/minicart.js"></script>
 	<script>
 		googles.render();
-
 		googles.cart.on('googles_checkout', function (evt) {
 			var items, len, i;
-
 			if (this.subtotal() > 0) {
 				items = this.items();
-
 				for (i = 0, len = items.length; i < len; i++) {}
 			}
 		});
@@ -975,52 +584,73 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	</script>
 	<!-- carousel -->
-	<!-- Count-down -->
-	<script src="js/simplyCountdown.js"></script>
-	<link href="css/simplyCountdown.css" rel='stylesheet' type='text/css' />
-	<script>
-		var d = new Date();
-		simplyCountdown('simply-countdown-custom', {
-			year: d.getFullYear(),
-			month: d.getMonth() + 2,
-			day: 25
-		});
-	</script>
-	<!--// Count-down -->
-	<script src="js/owl.carousel.js"></script>
+	<!-- easy-responsive-tabs -->
+	<script src="js/easy-responsive-tabs.js"></script>
 	<script>
 		$(document).ready(function () {
-			$('.owl-carousel').owlCarousel({
-				loop: true,
-				margin: 10,
-				responsiveClass: true,
-				responsive: {
-					0: {
-						items: 1,
-						nav: true
-					},
-					600: {
-						items: 2,
-						nav: false
-					},
-					900: {
-						items: 3,
-						nav: false
-					},
-					1000: {
-						items: 4,
-						nav: true,
-						loop: false,
-						margin: 20
-					}
+			$('#horizontalTab').easyResponsiveTabs({
+				type: 'default', //Types: default, vertical, accordion           
+				width: 'auto', //auto or any width like 600px
+				fit: true, // 100% fit in a container
+				closed: 'accordion', // Start closed if in accordion view
+				activate: function (event) { // Callback function if tab is switched
+					var $tab = $(this);
+					var $info = $('#tabInfo');
+					var $name = $('span', $info);
+					$name.text($tab.text());
+					$info.show();
 				}
-			})
-		})
+			});
+			$('#verticalTab').easyResponsiveTabs({
+				type: 'vertical',
+				width: 'auto',
+				fit: true
+			});
+		});
 	</script>
-
-	<!-- //end-smooth-scrolling -->
-
-
+	<!--quantity-->
+	<script>
+		$('.value-plus').on('click', function () {
+			var divUpd = $(this).parent().find('.value'),
+				newVal = parseInt(divUpd.text(), 10) + 1;
+			divUpd.text(newVal);
+		});
+		$('.value-minus').on('click', function () {
+			var divUpd = $(this).parent().find('.value'),
+				newVal = parseInt(divUpd.text(), 10) - 1;
+			if (newVal >= 1) divUpd.text(newVal);
+		});
+	</script>
+	<!--quantity-->
+	<!--close-->
+	<script>
+		$(document).ready(function (c) {
+			$('.close1').on('click', function (c) {
+				$('.rem1').fadeOut('slow', function (c) {
+					$('.rem1').remove();
+				});
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function (c) {
+			$('.close2').on('click', function (c) {
+				$('.rem2').fadeOut('slow', function (c) {
+					$('.rem2').remove();
+				});
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function (c) {
+			$('.close3').on('click', function (c) {
+				$('.rem3').fadeOut('slow', function (c) {
+					$('.rem3').remove();
+				});
+			});
+		});
+	</script>
+	<!--//close-->
 	<!-- dropdown nav -->
 	<script>
 		$(document).ready(function () {
@@ -1037,7 +667,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	</script>
 	<!-- //dropdown nav -->
-  <script src="js/move-top.js"></script>
+	<script src="js/move-top.js"></script>
     <script src="js/easing.js"></script>
     <script>
         jQuery(document).ready(function($) {
@@ -1059,17 +689,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             							easingType: 'linear' 
             						 };
             						*/
-
             $().UItoTop({
                 easingType: 'easeOutQuart'
             });
-
         });
     </script>
     <!--// end-smoth-scrolling -->
-
 	<script src="js/bootstrap.js"></script>
 	<!-- js file -->
 </body>
-
 </html>
