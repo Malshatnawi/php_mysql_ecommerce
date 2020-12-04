@@ -1,5 +1,5 @@
 <?php 
-/*
+
 session_start();
 
 if(isset($_SESSION['admin'])){
@@ -17,7 +17,7 @@ if(!$connection){
     die("can not connect to the server");
 }
 
-
+/*
 $query="SELECT * FROM customers WHERE customer_id = {$_GET['id']};";
 
 
@@ -389,47 +389,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<table class="timetable_sub">
 						<thead>
 							<tr>
-								<th>SL No.</th>
 								<th>Order</th>
-								<th>Quantity</th>
-								<th>Product Name</th>
-
-								<th>Price</th>
-								<th>Remove</th>
+								<th>Total Price</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="rem1">
-								<td class="invert">1</td>
-								<td class="invert-image">
-									<a href="single.html">
-										<img src="images/s1.jpg" alt=" " class="img-responsive">
-									</a>
-								</td>
-								<td class="invert">
-									<div class="quantity">
-										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value">
-												<span>1</span>
-											</div>
-											<div class="entry value-plus active">&nbsp;</div>
-										</div>
-									</div>
-								</td>
-								<td class="invert">Irayz Butterfly </td>
+                            
+                        
+                        <?php 
+                         
+                         $query  = "SELECT * FROM orders INNER JOIN products
+                                    WHERE orders.customer_id = {$_SESSION['customer']}";
+                         $result = mysqli_connect($connection, $query);
+                         $rows   = mysqli_fetch_assoc($result);
+                         while ($rows >0 ){
+                         
+                            echo "<tr class='rem1'>";
+                            echo "<td class='invert'>{$rows['order_id']}</td>";
+                            echo "<td class='invert'>{$rows['order_id']}</td>";
+                            
 
-								<td class="invert">$281.00</td>
-								<td class="invert">
-									<div class="rem">
-										<div class="close1"> </div>
-									</div>
 
-								</td>
-							</tr>
+                        echo "<tr class='rem1'>
+                        <td class='invert'>{$rows['order_id']}</td>
+                        <td class='invert>{$rows['total_amount']}</td>
+                        </tr>";
+                               }
+                               else {
+                                   echo "error";
+                               }
+                        ?>
+
+
+
                         </tbody>
                         
-					</table>
+                    </table>
+                    
                 </div>
             </div>
         </div>
